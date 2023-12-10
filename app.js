@@ -1,10 +1,12 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const cors = require('cors');
 const app = express();
 const port = 3000;
 
 app.use(express.json());
+app.use(cors());
 
 const quotesFilePath = path.join(__dirname, 'movieQuotes.json');
 const movieQuotes = JSON.parse(fs.readFileSync(quotesFilePath, 'utf-8'));
