@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
 const app = express();
-const port = 3000;
+const port = process.env.PORT||3000;
 
 app.use(express.json());
 app.use(cors());
@@ -11,8 +11,8 @@ app.use(cors());
 const quotesFilePath = path.join(__dirname, 'movieQuotes.json');
 const movieQuotes = JSON.parse(fs.readFileSync(quotesFilePath, 'utf-8'));
 
-app.post('/api/getMovieQuote', (req, res) => {
-  const { name } = req.body;
+app.get('/api/getMovieQuote', (req, res) => {
+  const { name } = req.query;
 
   const randomIndex = Math.floor(Math.random() * movieQuotes.length);
   const quote = movieQuotes[randomIndex];
